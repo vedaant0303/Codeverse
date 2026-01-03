@@ -2,8 +2,8 @@
 // In a real application, this would come from an API
 
 export const commodities = [
-  { id: 1, name: 'Vegetables', icon: 'https://images.unsplash.com/photo-1597362925123-77861d3fbac7?w=100&h=100&fit=crop', count: 45 },
-  { id: 2, name: 'Fruits', icon: 'https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=100&h=100&fit=crop', count: 32 },
+  { id: 1, name: 'Vegetables', icon: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=300&fit=crop', count: 45 },
+  { id: 2, name: 'Fruits', icon: 'https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=400&h=300&fit=crop', count: 32 },
 ];
 
 // Alias for backward compatibility

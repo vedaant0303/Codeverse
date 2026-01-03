@@ -1,21 +1,23 @@
+/* Vendor Cards - Rectangular Modern Design */
 .vendor-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .vendor-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   border-color: transparent;
 }
 
 .vendor-header {
   position: relative;
-  height: 120px;
+  height: 180px;
   overflow: hidden;
 }
 
@@ -32,14 +34,14 @@
 }
 
 .vendor-card:hover .vendor-img {
-  transform: scale(1.08);
+  transform: scale(1.05);
 }
 
 .status-badge {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 4px 10px;
+  top: 12px;
+  right: 12px;
+  padding: 5px 12px;
   border-radius: 20px;
   font-size: 11px;
   font-weight: 600;
@@ -50,22 +52,22 @@
 
 .status-badge.open {
   background: var(--primary);
-  color: var(--white);
+  color: #ffffff;
 }
 
 .status-badge.closed {
   background: #ef4444;
-  color: var(--white);
+  color: #ffffff;
 }
 
 .vendor-body {
-  padding: 16px;
+  padding: 18px 20px;
 }
 
 .vendor-name {
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 700;
-  color: var(--text-dark);
+  color: #1a1a1a;
   margin-bottom: 10px;
   white-space: nowrap;
   overflow: hidden;
@@ -76,37 +78,33 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .vendor-rating {
   display: flex;
   align-items: center;
   gap: 4px;
-  background: var(--accent-light);
-  padding: 4px 8px;
-  border-radius: 6px;
-}
-
-.rating-star {
-  font-size: 12px;
+  background: #fef3c7;
+  padding: 5px 10px;
+  border-radius: 8px;
 }
 
 .rating-value {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
-  color: var(--accent);
+  color: #d97706;
 }
 
 .rating-count {
-  font-size: 11px;
-  color: var(--text-muted);
+  font-size: 12px;
+  color: #9ca3af;
   margin-left: 2px;
 }
 
 .vendor-distance {
-  font-size: 12px;
-  color: var(--text-muted);
+  font-size: 13px;
+  color: #6b7280;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -117,25 +115,25 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 12px;
-  border-top: 1px solid var(--border-light);
+  padding-top: 14px;
+  border-top: 1px solid #f3f4f6;
 }
 
 .speciality-tag {
-  padding: 5px 10px;
-  background: var(--bg-light);
-  color: var(--text-dark);
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 500;
+  padding: 6px 12px;
+  background: #f0fdf4;
+  color: #059669;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 130px;
+  max-width: 140px;
 }
 
 .items-count {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--primary);
   font-weight: 600;
   display: flex;
@@ -143,52 +141,53 @@
   gap: 4px;
 }
 
-/* Mobile Responsive */
+/* Tablet Responsive */
 @media (max-width: 768px) {
   .vendor-header {
-    height: 100px;
+    height: 150px;
   }
 
   .vendor-body {
-    padding: 14px;
+    padding: 14px 16px;
   }
 
   .vendor-name {
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 8px;
   }
 
   .vendor-rating {
-    padding: 3px 6px;
+    padding: 4px 8px;
   }
 
   .rating-value {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .status-badge {
-    padding: 3px 8px;
+    padding: 4px 10px;
     font-size: 10px;
   }
 
   .speciality-tag {
-    padding: 4px 8px;
-    font-size: 10px;
-    max-width: 110px;
+    padding: 5px 10px;
+    font-size: 11px;
+    max-width: 120px;
   }
 }
 
+/* Mobile Responsive */
 @media (max-width: 480px) {
   .vendor-header {
-    height: 90px;
+    height: 130px;
   }
 
   .vendor-body {
-    padding: 12px;
+    padding: 12px 14px;
   }
 
   .vendor-name {
-    font-size: 13px;
+    font-size: 15px;
   }
 
   .vendor-details {
@@ -196,7 +195,7 @@
   }
 
   .vendor-distance {
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .vendor-footer {
@@ -205,11 +204,11 @@
 
   .speciality-tag {
     max-width: 100px;
-    font-size: 9px;
+    font-size: 10px;
   }
 
   .items-count {
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .vendor-card:hover {

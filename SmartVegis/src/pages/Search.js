@@ -6,19 +6,11 @@ import './Search.css';
 
 const Search = () => {
   const [searchParams] = useSearchParams();
-  const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
+  const [searchQuery] = useState(searchParams.get('q') || '');
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || 'All');
   const [sortBy, setSortBy] = useState('relevance');
   const [availabilityFilter, setAvailabilityFilter] = useState('all');
   const [filteredProducts, setFilteredProducts] = useState(products);
-
-  useEffect(() => {
-    // Update search query from URL params
-    const q = searchParams.get('q') || '';
-    const cat = searchParams.get('category') || 'All';
-    setSearchQuery(q);
-    setSelectedCategory(cat);
-  }, [searchParams]);
 
   useEffect(() => {
     let result = [...products];
@@ -60,142 +52,102 @@ const Search = () => {
         result.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
         break;
       default:
-        // Keep default order for relevance
         break;
     }
 
     setFilteredProducts(result);
   }, [searchQuery, selectedCategory, sortBy, availabilityFilter]);
 
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
   return (
     <div className="search-page">
       <div className="container">
-        {/* Search Header */}
-        <div className="search-header">
-          <div className="search-input-wrapper">
-            <span className="search-icon">🔍</span>
-            <input
-              type="text"
-              placeholder="Search vegetables, fruits, vendors..."
-              value={searchQuery}
-              onChange={handleSearchChange}
-              className="search-page-input"
-            />
-            {searchQuery && (
+        {/* Page Title */}
+        <div className="browse-header">
+          <h1>Browse Products</h1>
+        </div>
+
+        {/* Horizontal Filters Bar */}
+        <div className="filters-bar">
+          {/* Commodities Filter */}
+          <div className="filter-card">
+            <h3>Commodities</h3>
+            <div className="filter-chips">
               <button
-                className="clear-search"
-                onClick={() => setSearchQuery('')}
+                className={`filter-chip ${selectedCategory === 'All' ? 'active' : ''}`}
+                onClick={() => setSelectedCategory('All')}
               >
-                ✕
+                All
               </button>
-            )}
+              {commodities.map(cat => (
+                <button
+                  key={cat.id}
+                  className={`filter-chip ${selectedCategory === cat.name ? 'active' : ''}`}
+                  onClick={() => setSelectedCategory(cat.name)}
+                >
+                  <img src={cat.icon} alt={cat.name} className="chip-icon" />
+                  {cat.name}
+                </button>
+              ))}
+            </div>
           </div>
-          <div className="search-results-count">
-            Found <strong>{filteredProducts.length}</strong> products
-            {searchQuery && <span> for "{searchQuery}"</span>}
-            {selectedCategory !== 'All' && <span> in {selectedCategory}</span>}
+
+          {/* Availability Filter */}
+          <div className="filter-card">
+            <h3>Availability</h3>
+            <div className="filter-chips">
+              <button
+                className={`filter-chip ${availabilityFilter === 'all' ? 'active' : ''}`}
+                onClick={() => setAvailabilityFilter('all')}
+              >
+                All
+              </button>
+              <button
+                className={`filter-chip ${availabilityFilter === 'inStock' ? 'active' : ''}`}
+                onClick={() => setAvailabilityFilter('inStock')}
+              >
+                🟢 In Stock
+              </button>
+              <button
+                className={`filter-chip ${availabilityFilter === 'lowStock' ? 'active' : ''}`}
+                onClick={() => setAvailabilityFilter('lowStock')}
+              >
+                🟡 Low Stock
+              </button>
+            </div>
+          </div>
+
+          {/* Sort By */}
+          <div className="filter-card sort-card">
+            <h3>Sort By</h3>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="sort-select"
+            >
+              <option value="relevance">Relevance</option>
+              <option value="priceLow">Price: Low to High</option>
+              <option value="priceHigh">Price: High to Low</option>
+              <option value="rating">Highest Rated</option>
+              <option value="distance">Nearest First</option>
+            </select>
           </div>
         </div>
 
-        <div className="search-content">
-          {/* Filters Sidebar */}
-          <aside className="filters-sidebar">
-            <div className="filter-section">
-              <h3>Commodities</h3>
-              <div className="filter-options">
-                <label className="filter-option">
-                  <input
-                    type="radio"
-                    name="category"
-                    checked={selectedCategory === 'All'}
-                    onChange={() => setSelectedCategory('All')}
-                  />
-                  <span>All Commodities</span>
-                </label>
-                {commodities.map(cat => (
-                  <label key={cat.id} className="filter-option">
-                    <input
-                      type="radio"
-                      name="category"
-                      checked={selectedCategory === cat.name}
-                      onChange={() => setSelectedCategory(cat.name)}
-                    />
-                    <img src={cat.icon} alt={cat.name} className="filter-icon" />
-                    <span>{cat.name}</span>
-                  </label>
-                ))}
-              </div>
+        {/* Products Grid */}
+        <div className="products-section">
+          {filteredProducts.length > 0 ? (
+            <div className="products-grid">
+              {filteredProducts.map(product => (
+                <ProductCard key={product.id} product={product} />
+              ))}
             </div>
-
-            <div className="filter-section">
-              <h3>Availability</h3>
-              <div className="filter-options">
-                <label className="filter-option">
-                  <input
-                    type="radio"
-                    name="availability"
-                    checked={availabilityFilter === 'all'}
-                    onChange={() => setAvailabilityFilter('all')}
-                  />
-                  <span>All</span>
-                </label>
-                <label className="filter-option">
-                  <input
-                    type="radio"
-                    name="availability"
-                    checked={availabilityFilter === 'inStock'}
-                    onChange={() => setAvailabilityFilter('inStock')}
-                  />
-                  <span>In Stock</span>
-                </label>
-                <label className="filter-option">
-                  <input
-                    type="radio"
-                    name="availability"
-                    checked={availabilityFilter === 'lowStock'}
-                    onChange={() => setAvailabilityFilter('lowStock')}
-                  />
-                  <span>Low Stock</span>
-                </label>
-              </div>
+          ) : (
+            <div className="no-results">
+              <span className="no-results-emoji">🔍</span>
+              <h3>No products found</h3>
+              <p>Try adjusting your filters</p>
             </div>
-
-            <div className="filter-section">
-              <h3>Sort By</h3>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="sort-select"
-              >
-                <option value="relevance">Relevance</option>
-                <option value="priceLow">Price: Low to High</option>
-                <option value="priceHigh">Price: High to Low</option>
-                <option value="rating">Highest Rated</option>
-                <option value="distance">Nearest First</option>
-              </select>
-            </div>
-          </aside>
-
-          {/* Products Grid */}
-          <main className="search-results">
-            {filteredProducts.length > 0 ? (
-              <div className="products-grid">
-                {filteredProducts.map(product => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-            ) : (
-              <div className="no-results">
-                <span className="no-results-emoji">🔍</span>
-                <h3>No products found</h3>
-                <p>Try adjusting your search or filters</p>
-              </div>
-            )}
-          </main>
+          )}
         </div>
       </div>
     </div>

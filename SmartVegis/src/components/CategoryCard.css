@@ -1,16 +1,16 @@
+/* Commodity Cards - Vibrant Active Design */
 .category-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 18px 14px;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: #ffffff;
+  border-radius: 24px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  min-width: 100px;
-  position: relative;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  width: 320px;
   overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  border: 3px solid transparent;
 }
 
 .category-card::before {
@@ -19,93 +19,156 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
-  background: var(--primary-gradient);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+  border-radius: 24px;
+}
+
+.category-card.active {
+  border-color: #059669;
+  box-shadow: 0 12px 40px rgba(5, 150, 105, 0.25);
 }
 
 .category-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow);
-  border-color: var(--primary-light);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  border-color: #10b981;
 }
 
 .category-card:hover::before {
-  transform: scaleX(1);
+  opacity: 1;
 }
 
+/* Product label */
+.category-label {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  z-index: 3;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Image container */
 .category-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
+  width: 100%;
+  height: 220px;
   object-fit: cover;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  border-radius: 0;
+  margin: 0;
+  display: block;
+  transition: transform 0.5s ease;
+  position: relative;
+  z-index: 1;
 }
 
 .category-card:hover .category-icon {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
+/* Card content */
+.category-content {
+  padding: 24px 28px;
+  background: #ffffff;
+  position: relative;
+  z-index: 2;
+}
+
+/* Category name */
 .category-name {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-dark);
-  margin-bottom: 3px;
-  text-align: center;
+  font-size: 22px;
+  font-weight: 800;
+  color: #065f46;
+  margin-bottom: 8px;
+  text-align: left;
+  display: block;
 }
 
+/* Item count */
 .category-count {
-  font-size: 11px;
-  color: var(--text-muted);
-  font-weight: 500;
+  font-size: 15px;
+  color: #059669;
+  font-weight: 600;
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: inline-block;
+  text-align: left;
+}
+
+/* Decorative arrow */
+.category-card::after {
+  content: '→';
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
+  font-size: 24px;
+  color: #10b981;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+  z-index: 3;
+}
+
+.category-card:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Tablet Responsive */
+@media (max-width: 768px) {
+  .category-card {
+    width: 280px;
+  }
+
+  .category-icon {
+    height: 180px;
+  }
+
+  .category-name {
+    font-size: 20px;
+  }
+
+  .category-count {
+    font-size: 14px;
+  }
+
+  .category-content {
+    padding: 20px 24px;
+  }
 }
 
 /* Mobile Responsive */
-@media (max-width: 768px) {
-  .category-card {
-    padding: 14px 10px;
-    min-width: 85px;
-  }
-
-  .category-icon {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 8px;
-  }
-
-  .category-name {
-    font-size: 12px;
-  }
-
-  .category-count {
-    font-size: 10px;
-  }
-}
-
 @media (max-width: 480px) {
   .category-card {
-    padding: 12px 8px;
-    min-width: 75px;
+    width: 100%;
+    max-width: 340px;
   }
 
   .category-icon {
-    width: 42px;
-    height: 42px;
-    margin-bottom: 6px;
+    height: 170px;
   }
 
   .category-name {
-    font-size: 11px;
+    font-size: 18px;
   }
 
   .category-count {
-    font-size: 9px;
+    font-size: 13px;
+    padding: 6px 12px;
   }
 
-  .category-card:hover {
-    transform: none;
+  .category-content {
+    padding: 18px 20px;
   }
 }
