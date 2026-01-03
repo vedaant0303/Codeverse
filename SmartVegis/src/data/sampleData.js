@@ -4,10 +4,6 @@
 export const commodities = [
   { id: 1, name: 'Vegetables', icon: 'https://images.unsplash.com/photo-1597362925123-77861d3fbac7?w=100&h=100&fit=crop', count: 45 },
   { id: 2, name: 'Fruits', icon: 'https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=100&h=100&fit=crop', count: 32 },
-  { id: 3, name: 'Leafy Greens', icon: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=100&h=100&fit=crop', count: 18 },
-  { id: 4, name: 'Root Veggies', icon: 'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=100&h=100&fit=crop', count: 15 },
-  { id: 5, name: 'Exotic Fruits', icon: 'https://images.unsplash.com/photo-1553279768-865429fa0078?w=100&h=100&fit=crop', count: 22 },
-  { id: 6, name: 'Citrus', icon: 'https://images.unsplash.com/photo-1582979512210-99b6a53386f9?w=100&h=100&fit=crop', count: 12 },
 ];
 
 // Alias for backward compatibility
